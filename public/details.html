@@ -246,9 +246,6 @@
             </div>
         </div>
 
-        <label class="form-label">Email Address</label>
-        <input type="email" class="form-input" id="email" placeholder="john.doe@example.com" style="margin-bottom:24px;">
-
         <label class="form-label">Phone Number</label>
         <div class="phone-group" id="phoneGroup">
             <span class="phone-prefix">+237</span>
@@ -268,13 +265,11 @@
         // Pre-fill if user goes back
         if (localStorage.getItem('firstName')) document.getElementById('firstName').value = localStorage.getItem('firstName');
         if (localStorage.getItem('lastName')) document.getElementById('lastName').value = localStorage.getItem('lastName');
-        if (localStorage.getItem('email')) document.getElementById('email').value = localStorage.getItem('email');
         if (localStorage.getItem('phone')) document.getElementById('phone').value = localStorage.getItem('phone');
 
         document.getElementById('nextBtn').addEventListener('click', function() {
             const firstName = document.getElementById('firstName').value.trim();
             const lastName = document.getElementById('lastName').value.trim();
-            const email = document.getElementById('email').value.trim();
             const phone = document.getElementById('phone').value.trim();
 
             // Reset invalid styles
@@ -290,24 +285,19 @@
                 document.getElementById('lastName').classList.add('invalid');
                 valid = false;
             }
-            if (!email || !email.includes('@') || !email.includes('.')) {
-                document.getElementById('email').classList.add('invalid');
-                valid = false;
-            }
             if (!phone || phone.length !== 9 || !/^\d+$/.test(phone)) {
                 document.getElementById('phoneGroup').classList.add('invalid');
                 valid = false;
             }
 
             if (!valid) {
-                alert('Please fill in all fields correctly.\n• Email must be valid\n• Phone number must be exactly 9 digits');
+                alert('Please fill in all fields correctly.\n• Phone number must be exactly 9 digits');
                 return;
             }
 
             // Save to localStorage
             localStorage.setItem('firstName', firstName);
             localStorage.setItem('lastName', lastName);
-            localStorage.setItem('email', email);
             localStorage.setItem('phone', phone);
 
             // Go to summary (clean URL)
